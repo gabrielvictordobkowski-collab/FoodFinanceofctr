@@ -1,0 +1,39 @@
+COMO COLOCAR O FOODFINANCE NO AR (passo a passo)
+
+IMPORTANTE: a pasta que voce envia para o GitHub precisa ser ESTA, a que mostra
+"package.json" e a pasta "app" lado a lado. Nao envie a pasta de fora.
+
+1) Extraia o ZIP (botao direito > Extrair tudo). Abra a pasta extraida.
+   Confira: voce deve ver package.json, app, components, lib, public, supabase, tests.
+
+2) Abra o PowerShell DENTRO dessa pasta (Shift + botao direito > "Abrir no Terminal") e rode:
+
+   git init
+   git add .
+   git commit -m "FoodFinance"
+   git branch -M main
+   git remote add origin https://github.com/SEU_USUARIO/SEU_REPOSITORIO.git
+   git push -u origin main --force
+
+   (troque a URL pela do seu repositorio; o --force substitui o conteudo antigo)
+
+3) No GitHub, abra o repositorio e confira: na primeira tela precisam aparecer
+   as pastas app, components, lib, public, supabase, tests e o arquivo package.json.
+
+4) Na Vercel: Add New > Project > escolha o repositorio.
+   - Framework: Next.js
+   - Root Directory: deixe vazio (./)
+   - Environment Variables: cadastre as do arquivo .env.example
+     (NEXT_PUBLIC_SUPABASE_URL, NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY,
+      NEXT_PUBLIC_KIWIFY_CHECKOUT_URL e as secretas SUPABASE_SERVICE_ROLE_KEY,
+      KIWIFY_WEBHOOK_TOKEN, KIWIFY_CLIENT_ID, KIWIFY_CLIENT_SECRET,
+      KIWIFY_ACCOUNT_ID, KIWIFY_PLAN_PRODUCTS)
+   - Clique em Deploy.
+
+5) Supabase: no SQL Editor rode supabase/APLICAR_NO_SUPABASE.sql (so se ainda nao aplicou) e, DEPOIS,
+   rode supabase/APLICAR_SEM_TRIAL.sql (obriga assinatura: sem periodo gratis).
+   Em Authentication > URL Configuration, coloque o endereco da Vercel em Site URL.
+
+6) Kiwify: cadastre https://SEU-DOMINIO/api/webhooks/kiwify como webhook.
+
+Se o build falhar, copie a linha vermelha do log e me envie.
